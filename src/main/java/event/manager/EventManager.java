@@ -1,10 +1,10 @@
 package event.manager;
 
 import event.db.DBConnectionProvider;
+import event.enums.EventType;
 import event.model.Event;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,12 +18,12 @@ public class EventManager {
         connection = DBConnectionProvider.getInstance().getConnection();
     }
     public void add(Event event) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("Insert into event(name, place, isOnline, price, eventType) Values(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement preparedStatement = connection.prepareStatement("Insert into event(name, place, is_Online, price, event_type) Values(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, event.getName());
         preparedStatement.setString(2, event.getPlace());
         preparedStatement.setString(3, event.getIsOnline());
         preparedStatement.setDouble(4, event.getPrice());
-        preparedStatement.setString(5, event.getEventType());
+        preparedStatement.setString(5, event.getEventType().name());
 
         preparedStatement.executeUpdate();
 
@@ -47,9 +47,9 @@ public class EventManager {
                 event.setId(resultSet.getInt("id"));
                 event.setName(resultSet.getString("name"));
                 event.setPlace(resultSet.getString("place"));
-                event.setIsOnline(resultSet.getString("isOnline"));
+                event.setIsOnline(resultSet.getString("is_Online"));
                 event.setPrice(resultSet.getDouble("price"));
-                event.setEventType(resultSet.getString("eventType"));
+                event.setEventType(EventType.valueOf(resultSet.getString("event_type")));
                 events.add(event);
 
             }

@@ -98,7 +98,8 @@ public class Main implements Commands {
         System.out.println("Please choose eventType");
         System.out.print(EXHIBITION.name() + ", ");
         System.out.println(CONCERT.name());
-        String eventType = scanner.nextLine();
+        String eventTypeStr = scanner.nextLine();
+        EventType eventType = EventType.valueOf(eventTypeStr);
         
         Event event = new Event();
         event.setName(eventname);

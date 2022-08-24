@@ -1,5 +1,6 @@
 package event.model;
 
+import event.enums.EventType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,9 +14,9 @@ public class Event {
     private String place;
     private String isOnline;
     private double price;
-    private String eventType;
+    private EventType eventType;
 
-    public Event(String name, String place, String isOnline, double price, String eventType) {
+    public Event(String name, String place, String isOnline, double price, EventType eventType) {
         this.name = name;
         this.place = place;
         this.isOnline = isOnline;
